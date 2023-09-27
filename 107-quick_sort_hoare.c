@@ -6,9 +6,9 @@ void hoare_sort(int *array, size_t size, int left, int right);
 void quick_sort_hoare(int *array, size_t size);
 
 /**
- * swap_ints - Swaps two integers in an array.
- * @a: The first swap integer.
- * @b: The second swap integer.
+ * swap_ints - Swap two integers in an array.
+ * @a: The first integer to swap.
+ * @b: The second integer to swap.
  */
 void swap_ints(int *a, int *b)
 {
@@ -20,7 +20,7 @@ void swap_ints(int *a, int *b)
 }
 
 /**
- * hoare_partition - Orders a subset of an array of integers
+ * hoare_partition - Order a subset of an array of integers
  *                   according to the hoare partition scheme.
  * @array: The array of integers.
  * @size: The size of the array.
@@ -57,7 +57,7 @@ int hoare_partition(int *array, size_t size, int left, int right)
 }
 
 /**
- * hoare_sort - Implements the quicksort algorithm through recursion.
+ * hoare_sort - Implement the quicksort algorithm through recursion.
  * @array: An array of integers to sort.
  * @size: The size of the array.
  * @left: The starting index of the array partition to order.
@@ -78,13 +78,13 @@ void hoare_sort(int *array, size_t size, int left, int right)
 }
 
 /**
- * quick_sort_hoare - Sorts an array of integers in ascending
+ * quick_sort_hoare - Sort an array of integers in ascending
  *                    order using the quicksort algorithm.
  * @array: An array of integers.
  * @size: The size of the array.
  *
  * Description: Uses the Hoare partition scheme. Prints
- * the array after each sorted swap of two elements.
+ * the array after each swap of two elements.
  */
 void quick_sort_hoare(int *array, size_t size)
 {
