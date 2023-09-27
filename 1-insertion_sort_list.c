@@ -1,64 +1,51 @@
 #include "sort.h"
 
 /**
-  * insertion_sort_list - sorts a doubly linked list of integers
-  * @list: double pointer to linked list.
-  *
-  */
+ * insertion_sort_list - Sort a given array using the Insertion
+ * sort algorithm in the ascending order.
+ *
+ * @list: The list to be sorted.
+ *
+ **/
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *head, *prev;
+	listint_t *sorted = NULL, *unsorted = NULL, *temp = NULL;
 
-	if (*list == NULL || list == NULL || (*list)->next == NULL)
-	{
+	if (list == NULL || (*list)->next == NULL)
 		return;
-	}
-
-	head = *list;
-
-	while (head)
+	unsorted = (*list)->next;
+	while (unsorted != NULL)
 	{
-		prev = head->prev;
-
-		while (prev && prev->n > head->n)
+		sorted = unsorted->prev;
+		temp = unsorted->next;
+		while (sorted != NULL)
 		{
-			swap(prev, head, list);
-			print_list(*list);
-			prev = head->prev;
+			if (unsorted->n < sorted->n)
+			{
+				sorted = sorted->prev;
+				if (unsorted->next != NULL)
+				{
+					unsorted->next->prev = unsorted->prev;
+				}
+				unsorted->prev->next = unsorted->next;
+				unsorted->prev = sorted;
+				if (sorted == NULL)
+				{
+					(*list)->prev = unsorted;
+					unsorted->next = *list;
+					*list = unsorted;
+				}
+				else
+				{
+					sorted->next->prev = unsorted;
+					unsorted->next = sorted->next;
+					sorted->next = unsorted;
+				}
+				print_list(*list);
+			}
+			else
+				break;
 		}
-
-		head = head->next;
+		unsorted = temp;
 	}
-}
-
-/**
-  * swap - swap two nodes of a list.
-  * @nodeA: node to be swapped.
-  * @nodeB: node to be swapped.
-  * @list: double pointer to list.
-  *
-  */
-void swap(listint_t *nodeA, listint_t *nodeB, listint_t **list)
-{
-	listint_t *temp1, *temp2;
-
-	if (nodeA == NULL || nodeB == NULL)
-		return;
-
-	temp1 = nodeA->prev;
-	temp2 = nodeB->next;
-
-	if (temp1)
-		temp1->next = nodeB;
-
-	if (temp2)
-		temp2->prev = nodeA;
-
-	nodeA->next = temp2;
-	nodeA->prev = nodeB;
-	nodeB->next = nodeA;
-	nodeB->prev = temp1;
-
-	if (temp1 == NULL)
-		*list = nodeB;
 }
